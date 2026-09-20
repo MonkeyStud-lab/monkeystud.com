@@ -260,7 +260,62 @@ a:active, a:hover { color: #ffff00; }
   font-size: 14px;
 }
 
-.project p { margin: 0.4em 0; font-size: 14px; }
+.fire.page-title {
+  font-size: 42px;
+}
+
+.jump {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  margin: 0 0 1em;
+}
+
+.feel {
+  background: #220044;
+  border: 4px ridge #ff00cc;
+  padding: 8px 12px;
+  margin: 0.8em 0 1.2em;
+  color: #ffccff;
+}
+
+.feel ul { margin: 0.4em 0 0.2em 1.2em; padding: 0; }
+.feel li { margin: 0.35em 0; }
+
+.kbd {
+  display: inline-block;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffff66;
+  background: #111;
+  border: 2px outset #888;
+  padding: 0 5px;
+}
+
+.tip {
+  background: #000040;
+  color: #ccffcc;
+  margin: 0.5em 0 1.1em;
+}
+
+.tip th {
+  background: #0000aa;
+  color: #ffff00;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 14px;
+  text-align: left;
+}
+
+.tip td {
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.tip td:first-child {
+  width: 34%;
+  color: #ffff99;
+  font-weight: bold;
+}
 
 .tiny {
   font-size: 11px;

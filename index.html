@@ -61,6 +61,7 @@
                         <a href="/">[Home]</a><br />
                         <a href="#whatsnew">[What's New]</a><br />
                         <a href="#projects">[Projects]</a><br />
+                        <a href="qol/">[Game QoL]</a><br />
                         <a href="https://github.com/MonkeyStud-lab" rel="noopener" target="_blank">[GitHub]</a><br />
                         <a href="#mascot">[Mascot]</a><br />
                         <a href="#guestbook">[Guestbook]</a><br />
@@ -147,7 +148,8 @@
                       <h2 id="whatsnew">What's New</h2>
                       <hr class="rainbow" />
                       <ul class="whats-new">
-                        <li><span class="new blink">NEW!</span> <b>09/19/2026</b> — Official laboratory primate ASCII now has its own widescreen gallery.</li>
+                        <li><span class="new blink">NEW!</span> <b>09/19/2026</b> — Game QoL is now per-game. GTA San Andreas notes are live.</li>
+                        <li><b>09/19/2026</b> — Official laboratory primate ASCII now has its own widescreen gallery.</li>
                         <li><b>09/19/2026</b> — Homepage converted to authentic 1990s style (tables, marquees, construction tape).</li>
                         <li><b>09/18/2026</b> — Now Playing Toast repo link fixed.</li>
                         <li><b>09/17/2026</b> — Site goes live on the information superhighway.</li>
@@ -178,13 +180,17 @@
                         <tr>
                           <th>
                             Game QoL
-                            <span class="wip">LAB</span>
+                            <span class="new blink">LIVE!</span>
                           </th>
                         </tr>
                         <tr>
                           <td>
-                            <p>Resident Evil 5 and GTA San Andreas helpers, trainer automation, and Steam Deck support notes.</p>
-                            <p class="tiny">Notes &amp; scripts — not a public release yet</p>
+                            <p>Per-game quality-of-life notes. First up: GTA San Andreas with DualSense, 60 FPS windowed, and GTA 5-feel controls.</p>
+                            <p>
+                              <a href="qol/">Pick a game!!!</a>
+                              &nbsp;·&nbsp;
+                              <a href="qol/gta-sa.html">GTA SA</a>
+                            </p>
                           </td>
                         </tr>
                       </table>
@@ -387,26 +393,6 @@
     </table>
   </center>
 
-  <script>
-    (function () {
-      var layer = document.getElementById("sparkles");
-      if (!layer) return;
-      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) return;
-      var last = 0;
-      document.addEventListener("mousemove", function (e) {
-        var now = Date.now();
-        if (now - last < 40) return;
-        last = now;
-        var star = document.createElement("span");
-        star.className = "sparkle";
-        star.textContent = "*";
-        star.style.left = e.clientX + "px";
-        star.style.top = e.clientY + "px";
-        layer.appendChild(star);
-        setTimeout(function () { star.remove(); }, 700);
-      });
-    })();
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>
