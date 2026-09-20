@@ -60,12 +60,13 @@
       document.body.appendChild(audio);
     }
     audio.loop = true;
+    audio.muted = false;
+    audio.volume = 1;
     if (!audio.currentSrc && !audio.getAttribute("src") && !audio.querySelector("source")) {
       audio.src = root + "audio/lab-theme.wav";
     } else if (audio.tagName && !audio.querySelector("source") && !audio.src) {
       audio.src = root + "audio/lab-theme.wav";
     }
-    try { audio.load(); } catch (e) {}
 
     var panel = document.querySelector(".midi");
     var toggle = document.getElementById("midi-toggle");
@@ -82,7 +83,6 @@
     }
 
     var wantOn = false;
-    var ctx = null;
 
     function setOn(on) {
       wantOn = on;
@@ -98,28 +98,27 @@
       }
     }
 
-    function unlock() {
-      var AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return Promise.resolve();
-      if (!ctx) ctx = new AC();
-      if (ctx.state === "suspended") return ctx.resume();
-      return Promise.resolve();
+    function fail(err) {
+      if (!wantOn) return;
+      setOn(false);
+      if (status) {
+        status.textContent = "Could not start audio" + (err && err.name ? " (" + err.name + ")" : "") + ". Click Play MIDI again.";
+      }
     }
 
     function play() {
       wantOn = true;
-      return unlock().then(function () {
-        if (!audio.currentSrc) audio.src = root + "audio/lab-theme.wav";
-        return audio.play();
-      }).then(function () {
-        if (wantOn) setOn(true);
-      }).catch(function (err) {
-        if (!wantOn) return;
-        setOn(false);
-        if (status) {
-          status.textContent = "Could not start audio" + (err && err.name ? " (" + err.name + ")" : "") + ". Click Play MIDI again.";
-        }
-      });
+      if (!audio.currentSrc) audio.src = root + "audio/lab-theme.wav";
+      audio.muted = false;
+      audio.volume = 1;
+      var started = audio.play();
+      if (started && typeof started.then === "function") {
+        started.then(function () {
+          if (wantOn) setOn(true);
+        }).catch(fail);
+      } else if (!audio.paused) {
+        setOn(true);
+      }
     }
 
     function stop() {
@@ -129,11 +128,7 @@
       setOn(false);
     }
 
-    function onToggle(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+    function onToggle() {
       if (wantOn && !audio.paused) stop();
       else play();
     }
