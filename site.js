@@ -56,9 +56,16 @@
       audio.id = "lab-midi";
       audio.loop = true;
       audio.preload = "auto";
+      audio.setAttribute("playsinline", "");
       document.body.appendChild(audio);
     }
-    audio.src = root + "audio/lab-theme.wav";
+    audio.loop = true;
+    if (!audio.currentSrc && !audio.getAttribute("src") && !audio.querySelector("source")) {
+      audio.src = root + "audio/lab-theme.wav";
+    } else if (audio.tagName && !audio.querySelector("source") && !audio.src) {
+      audio.src = root + "audio/lab-theme.wav";
+    }
+    try { audio.load(); } catch (e) {}
 
     var panel = document.querySelector(".midi");
     var toggle = document.getElementById("midi-toggle");
@@ -74,7 +81,11 @@
       toggle = document.getElementById("midi-toggle");
     }
 
+    var wantOn = false;
+    var ctx = null;
+
     function setOn(on) {
+      wantOn = on;
       if (panel) {
         if (on) panel.classList.add("on");
         else panel.classList.remove("on");
@@ -83,36 +94,53 @@
       if (status) {
         status.textContent = on
           ? "Now blasting in glorious 22kHz mono."
-          : "Click play — Netscape would have autoplayed.";
+          : "Click Play MIDI — Edge and Chrome block autoplay.";
       }
-      try {
-        if (on) sessionStorage.setItem("monkeystud-midi", "1");
-        else sessionStorage.removeItem("monkeystud-midi");
-      } catch (e) {}
+    }
+
+    function unlock() {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return Promise.resolve();
+      if (!ctx) ctx = new AC();
+      if (ctx.state === "suspended") return ctx.resume();
+      return Promise.resolve();
     }
 
     function play() {
-      var p = audio.play();
-      if (p && p.then) {
-        return p.then(function () { setOn(true); }).catch(function () { setOn(false); });
-      }
-      setOn(!audio.paused);
-    }
-
-    function stop() {
-      audio.pause();
-      audio.currentTime = 0;
-      setOn(false);
-    }
-
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        if (audio.paused) play();
-        else stop();
+      wantOn = true;
+      return unlock().then(function () {
+        if (!audio.currentSrc) audio.src = root + "audio/lab-theme.wav";
+        return audio.play();
+      }).then(function () {
+        if (wantOn) setOn(true);
+      }).catch(function (err) {
+        if (!wantOn) return;
+        setOn(false);
+        if (status) {
+          status.textContent = "Could not start audio" + (err && err.name ? " (" + err.name + ")" : "") + ". Click Play MIDI again.";
+        }
       });
     }
 
-    play();
+    function stop() {
+      wantOn = false;
+      audio.pause();
+      try { audio.currentTime = 0; } catch (e) {}
+      setOn(false);
+    }
+
+    function onToggle(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if (wantOn && !audio.paused) stop();
+      else play();
+    }
+
+    if (toggle) {
+      toggle.addEventListener("click", onToggle);
+    }
   }
 
   sparkles();

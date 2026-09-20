@@ -84,8 +84,10 @@
                       <p>
                         <button type="button" class="btn" id="midi-toggle">Play MIDI!!!</button>
                       </p>
-                      <p class="tiny" id="midi-status">Click play — Netscape would have autoplayed.</p>
-                      <audio id="lab-midi" loop preload="auto"></audio>
+                      <p class="tiny" id="midi-status">Click Play MIDI — Edge and Chrome block autoplay.</p>
+                      <audio id="lab-midi" loop preload="auto" playsinline>
+                        <source src="audio/lab-theme.wav" type="audio/wav" />
+                      </audio>
                     </td>
                   </tr>
                 </table>
