@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=920" />
+  <title>Resident Evil 5 QoL — MonkeyStud</title>
+  <meta name="description" content="Resident Evil 5 QoL: RE5Fix colour filter off, 4K shadows, ultrawide fixes, and a 4GB LAA patch on PC and Steam Deck." />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000080'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='22' font-family='Comic Sans MS,cursive' fill='%23ffff00'%3EM%3C/text%3E%3C/svg%3E" />
+</head>
+<body bgcolor="#000018" text="#00FF00" link="#00FFFF" vlink="#FF66FF" alink="#FFFF00" id="top">
+  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
+  <marquee class="top-marquee" behavior="scroll" direction="left" scrollamount="6">
+    *** RESIDENT EVIL 5 QOL *** RE5FIX *** COLOUR FILTER OFF *** 4K SHADOWS *** ULTRAWIDE UI *** 4GB LAA *** SAME PREFS ON STEAM DECK ***
+  </marquee>
+  <center>
+    <table class="page" width="780" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td>
+          <table class="banner" width="100%" cellspacing="0" cellpadding="10" border="5">
+            <tr>
+              <td align="center">
+                <h1 class="fire page-title">RE5</h1>
+                <p class="tagline">
+                  <font face="Comic Sans MS, Comic Sans, cursive" color="#FFFF00" size="4">
+                    ~*~ QoL for Steam RE5 on PC + Deck ~*~
+                  </font>
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <table class="panel inner" width="100%" cellspacing="0" cellpadding="10" border="4">
+            <tr>
+              <td>
+                <p class="jump">
+                  <a href="../">[Home]</a>
+                  &nbsp;|&nbsp;
+                  <a href="./">[Game QoL]</a>
+                  &nbsp;|&nbsp;
+                  <a href="gta-sa.html">[GTA SA]</a>
+                  &nbsp;|&nbsp;
+                  <a href="re5.html">[RE5]</a>
+                  &nbsp;|&nbsp;
+                  <a href="#feel">[Feel]</a>
+                  <a href="#core">[Core]</a>
+                  <a href="#visual">[Visual]</a>
+                  <a href="#deck">[Deck]</a>
+                  <a href="#sources">[Sources]</a>
+                </p>
+
+                <p>
+                  Live lab install: Steam <b>Resident Evil 5</b> (app 21690).
+                  Two pieces only — <a href="https://github.com/Lyall/RE5Fix" rel="noopener" target="_blank">RE5Fix</a>
+                  in the game root, plus a <b>4GB / Large Address Aware</b> patch on
+                  <font color="#FFFF00">re5dx9.exe</font>.
+                </p>
+
+                <div class="feel" id="feel">
+                  <b>The feel (read this first!!!)</b>
+                  <ul>
+                    <li><b>Colour filter off</b> — the stock green/yellow wash is gone.</li>
+                    <li><b>Shadows 4096</b> (4K-class). FOV bump and FPS cap left off.</li>
+                    <li><b>Ultrawide:</b> UI scaling, crash fix, and pre-rendered movies all on. Resolution limits removed; width/height 0 so it follows the desktop.</li>
+                    <li><b>4GB LAA</b> on the DX9 exe so heavier mods and longer sessions stay stable. Stock exe backup kept before the patch.</li>
+                    <li>Same RE5Fix prefs on <b>Steam Deck</b> (Proton), with the dinput8 loader instead of xinput.</li>
+                  </ul>
+                </div>
+
+                <h2 id="core">Core</h2>
+                <hr class="rainbow" />
+                <table class="tip" width="100%" cellspacing="0" cellpadding="6" border="2">
+                  <tr>
+                    <th>Mod</th>
+                    <th>What it does here</th>
+                  </tr>
+                  <tr>
+                    <td><a href="https://github.com/Lyall/RE5Fix" rel="noopener" target="_blank">RE5Fix (Lyall)</a></td>
+                    <td>
+                      DLL hook for ultrawide QoL, colour filter, shadows, optional FOV/FPS.
+                      PC loader is <font color="#FFFF00">xinput1_3.dll</font> plus
+                      <font color="#FFFF00">RE5Fix.ini</font> in the game root.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4GB / Large Address Aware</td>
+                    <td>
+                      Patched <font color="#FFFF00">re5dx9.exe</font> for &gt;2GB address space.
+                      Helps stability with heavier mods. Stock backup kept next to the exe.
+                    </td>
+                  </tr>
+                </table>
+
+                <h2 id="visual">RE5Fix.ini (PC)</h2>
+                <hr class="rainbow" />
+                <p>What is actually flipped on in the live INI — not every unused slider.</p>
+                <table class="tip" width="100%" cellspacing="0" cellpadding="6" border="2">
+                  <tr>
+                    <th>Option</th>
+                    <th>Here</th>
+                  </tr>
+                  <tr>
+                    <td>Remove Colour Filter</td>
+                    <td><b>on</b> — kills the green/yellow filter</td>
+                  </tr>
+                  <tr>
+                    <td>Shadow Quality</td>
+                    <td><b>on</b> at <b>4096</b></td>
+                  </tr>
+                  <tr>
+                    <td>Remove Resolution Limits</td>
+                    <td><b>on</b></td>
+                  </tr>
+                  <tr>
+                    <td>Custom Resolution</td>
+                    <td>0 × 0 — use the desktop resolution</td>
+                  </tr>
+                  <tr>
+                    <td>Fix UI Scaling</td>
+                    <td><b>on</b> (ultrawide)</td>
+                  </tr>
+                  <tr>
+                    <td>Fix Ultrawide Crash</td>
+                    <td><b>on</b></td>
+                  </tr>
+                  <tr>
+                    <td>Fix Movies</td>
+                    <td><b>on</b> — pre-rendered videos</td>
+                  </tr>
+                  <tr>
+                    <td>Increase FOV</td>
+                    <td><span class="wip">off</span> (value 25 unused)</td>
+                  </tr>
+                  <tr>
+                    <td>FPS Cap</td>
+                    <td><span class="wip">off</span> (value 120 unused)</td>
+                  </tr>
+                </table>
+
+                <h2 id="deck">Steam Deck (Proton)</h2>
+                <hr class="rainbow" />
+                <table class="tip" width="100%" cellspacing="0" cellpadding="6" border="2">
+                  <tr>
+                    <th>Piece</th>
+                    <th>What it does here</th>
+                  </tr>
+                  <tr>
+                    <td>RE5Fix v1.0.4</td>
+                    <td>Same prefs as PC (colour filter off, shadows 4096). Loader is <font color="#FFFF00">dinput8.dll</font> instead of xinput.</td>
+                  </tr>
+                  <tr>
+                    <td>Launch option</td>
+                    <td><font color="#FFFF00">WINEDLLOVERRIDES="dinput8=n,b" %command%</font></td>
+                  </tr>
+                  <tr>
+                    <td>4GB LAA</td>
+                    <td>Same Windows exe patch, running under Proton.</td>
+                  </tr>
+                </table>
+
+                <h2>Not in the live load</h2>
+                <hr class="rainbow" />
+                <p>
+                  Skipped on purpose: Nexus HD texture pack (~32GB).
+                  Steam Workshop “QOL Fixes” (optional companion in the RE5Fix docs) is not installed here.
+                  No trainers.
+                </p>
+
+                <h2 id="sources">Sources</h2>
+                <hr class="rainbow" />
+                <p>
+                  <a href="https://github.com/Lyall/RE5Fix" rel="noopener" target="_blank">RE5Fix (Lyall)</a>
+                </p>
+                <p class="tiny">
+                  This page is the lab notes for the live stack — not a public release pack.
+                  &nbsp;|&nbsp; <a href="./">[Game QoL]</a> &nbsp;|&nbsp; <a href="../">[Home]</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </center>
+  <script src="../site.js"></script>
+</body>
+</html>
