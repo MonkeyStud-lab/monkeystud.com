@@ -275,6 +275,33 @@ a:active, a:hover { color: #ffff00; }
   line-height: 1.15;
 }
 
+.mascot-page {
+  width: min(1400px, calc(100% - 16px));
+  max-width: calc(100% - 16px);
+  table-layout: auto;
+  margin: 0 auto 28px;
+  background: #000033;
+  border: 6px ridge #c0c0c0;
+}
+
+.mascot-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #000008;
+  border: 3px inset #808080;
+  padding: 8px 10px;
+}
+
+.ascii-mascot {
+  display: inline-block;
+  margin: 0;
+  color: #ffcc66;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 6.5px;
+  line-height: 1.05;
+  white-space: pre;
+}
+
 .midi p { margin: 0.35em 0; }
 
 .midi-eq {
