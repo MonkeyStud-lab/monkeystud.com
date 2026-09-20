@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=920" />
   <title>*** WELCOME TO MONKEYSTUD.COM ***</title>
   <meta name="description" content="MonkeyStud lab: personal tools, game mods, and homelab experiments. Best viewed in Netscape Navigator 4.0 at 800x600." />
   <link rel="stylesheet" href="styles.css" />
@@ -40,8 +40,8 @@
                 <p class="updated">
                   Last updated: <b>September 19, 2026</b>
                   &nbsp;|&nbsp; You are visitor number
-                  <span class="counter" title="hit counter.gif">
-                    <span>0</span><span>0</span><span>0</span><span>1</span><span>3</span><span>3</span><span>7</span>
+                  <span class="counter" id="hit-counter" title="live hit counter">
+                    <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
                   </span>
                 </p>
               </td>
@@ -80,8 +80,12 @@
                   <tr>
                     <td align="center">
                       <p class="midi-eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></p>
-                      <p><b>silence.mid</b></p>
-                      <p class="tiny">Autoplay blocked (your browser is more polite than Netscape was).</p>
+                      <p><b id="midi-title">lab-theme.mid</b></p>
+                      <p>
+                        <button type="button" class="btn" id="midi-toggle">Play MIDI!!!</button>
+                      </p>
+                      <p class="tiny" id="midi-status">Click play — Netscape would have autoplayed.</p>
+                      <audio id="lab-midi" loop preload="auto"></audio>
                     </td>
                   </tr>
                 </table>

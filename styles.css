@@ -3,6 +3,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-width: 920px;
   color: #00ff00;
   background: #000018 url("img/stars.svg") repeat;
   font-family: "Times New Roman", Times, serif;
@@ -28,7 +29,6 @@ a:active, a:hover { color: #ffff00; }
 
 .page {
   width: 900px;
-  max-width: calc(100% - 16px);
   table-layout: fixed;
   margin: 12px auto 28px;
   background: #000033;
@@ -357,7 +357,20 @@ a:active, a:hover { color: #ffff00; }
   white-space: pre;
 }
 
-.midi p { margin: 0.35em 0; }
+.midi:not(.on) .midi-eq span { animation: none; opacity: 0.35; }
+
+.midi-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #000080;
+  color: #ffff00;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px 8px;
+  border-bottom: 3px ridge #c0c0c0;
+}
 
 .midi-eq {
   height: 28px;
@@ -444,16 +457,4 @@ a:active, a:hover { color: #ffff00; }
 
 @media (prefers-reduced-motion: reduce) {
   .blink, .fire, .globe, .midi-eq span, .sparkle { animation: none; }
-}
-
-@media (max-width: 900px) {
-  .page { width: 100% !important; }
-  .layout-row,
-  .layout-row > tbody,
-  .layout-row > tbody > tr,
-  .layout-row > tbody > tr > td {
-    display: block;
-    width: 100% !important;
-  }
-  .fire { font-size: 36px; }
 }
