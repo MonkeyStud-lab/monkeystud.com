@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=920" />
   <title>GTA San Andreas QoL — MonkeyStud</title>
-  <meta name="description" content="GTA San Andreas QoL + GTA 5-feel controls: DualSense, 60 FPS windowed, Focus, weapon wheel, and the live mod stack." />
+  <meta name="description" content="GTA San Andreas QoL + GTA 5-feel controls: DualSense, 60 FPS windowed, Focus, weapon wheel, Real Traffic Fix, VehDeform, and the live mod stack." />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000080'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='22' font-family='Comic Sans MS,cursive' fill='%23ffff00'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body bgcolor="#000018" text="#00FF00" link="#00FFFF" vlink="#FF66FF" alink="#FFFF00" id="top">
   <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
   <marquee class="top-marquee" behavior="scroll" direction="left" scrollamount="6">
-    *** GTA SAN ANDREAS QOL *** DUALSENSE + PS PROMPTS *** 60 FPS WINDOWED 1080P *** F2 SAVE *** TAB/Q WEAPON WHEEL *** CAPS / L3+R3 FOCUS ***
+    *** GTA SAN ANDREAS QOL *** DUALSENSE + PS PROMPTS *** 60 FPS WINDOWED 1080P *** REAL TRAFFIC FIX *** VEHDEFORM *** F2 SAVE *** TAB/Q WEAPON WHEEL *** CAPS / L3+R3 FOCUS ***
   </marquee>
   <center>
     <table class="page" width="780" cellspacing="0" cellpadding="0" border="0">
@@ -45,6 +45,7 @@
                   <a href="#feel">[Feel]</a>
                   <a href="#core">[Core]</a>
                   <a href="#controls">[Controls]</a>
+                  <a href="#traffic">[Traffic]</a>
                   <a href="#combat">[Combat]</a>
                   <a href="#focus">[Focus]</a>
                   <a href="#visual">[Visual]</a>
@@ -67,6 +68,8 @@
                     <li><span class="kbd">Tab</span> / <span class="kbd">Q</span> weapon wheel (slow-mo on).</li>
                     <li><span class="kbd">Caps Lock</span> or <span class="kbd">L3+R3</span> Focus: on-foot Area Kill + car slow-mo. No blue wash. Meter stays full.</li>
                     <li>Pad driveby: <span class="kbd">L1</span> aim, <span class="kbd">R1</span> shoot; D-pad left/right cycles weapons.</li>
+                    <li><b>Real Traffic Fix</b> — NPCs keep realistic speeds, slow for curves, trucks in the slow lane, fewer suicidal cut-ins. Defaults are fine. No other traffic-AI mod.</li>
+                    <li><b>VehDeform</b> — crashes, bullets, melee, and explosions dent the mesh. Cheats: <font color="#FFFF00">VDCOL</font> toggle (missions), <font color="#FFFF00">VDRES</font> repair, <font color="#FFFF00">VDBG</font> debug. Not with LocalDent.</li>
                   </ul>
                 </div>
 
@@ -133,6 +136,37 @@
                   <tr>
                     <td>Autosave &amp; Checkpoint</td>
                     <td>Checkpoints + save menu, English. Lives in <font color="#FFFF00">cleo\</font>.</td>
+                  </tr>
+                </table>
+
+                <h2 id="traffic">Traffic / Physics</h2>
+                <hr class="rainbow" />
+                <table class="tip" width="100%" cellspacing="0" cellpadding="6" border="2">
+                  <tr>
+                    <th>Mod</th>
+                    <th>What it does here</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="https://www.mixmods.com.br/2022/04/real-traffic-fix/" rel="noopener" target="_blank">Real Traffic Fix 2.2.1 beta</a>
+                    </td>
+                    <td>
+                      Junior_Djjr. Traffic keeps realistic speeds, slows for curves and obstacles, trucks/buses in the slow lane, fewer cut-ins, cars no longer stuck in the ground.
+                      Folder <font color="#FFFF00">modloader\RealTrafficFix\</font>. Defaults on.
+                      <a href="https://github.com/JuniorDjjr/real-traffic-fix" rel="noopener" target="_blank">source</a>.
+                      Don't stack another traffic-AI mod.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="https://www.patreon.com/ZZPuma/posts/vehdeform-1-3c-134153605" rel="noopener" target="_blank">VehDeform 1.3c</a>
+                    </td>
+                    <td>
+                      ZZPuma. Mesh dents on cars, bikes, boats, aircraft. Heavy hits can bend hoods, pop tires, kill the engine.
+                      Folder <font color="#FFFF00">modloader\VehDeform\</font>. Free public Patreon post (archive password is on that page).
+                      Cheats: <font color="#FFFF00">VDCOL</font> / <font color="#FFFF00">VDRES</font> / <font color="#FFFF00">VDBG</font>.
+                      Conflicts with LocalDent — this stack uses VehDeform only.
+                    </td>
                   </tr>
                 </table>
 
@@ -210,7 +244,7 @@
                 <h2>Not in the live load</h2>
                 <hr class="rainbow" />
                 <p>
-                  Skipped on purpose: Ultimate First Person, Proper Fixes, first-person aiming pack.
+                  Skipped on purpose: Ultimate First Person, Proper Fixes, first-person aiming pack, LocalDent (conflicts with VehDeform).
                   Removed after trying: custom GTA V-style unflip CLEO, standalone N-key driveby cycle (D-pad on Manual Driveby replaced it).
                 </p>
 
@@ -224,6 +258,9 @@
                   <a href="https://github.com/ThirteenAG/III.VC.SA.WindowedMode" rel="noopener" target="_blank">WindowedMode</a> ·
                   <a href="https://github.com/juicermv/GTA-GPS-Redux" rel="noopener" target="_blank">GPS Redux</a> ·
                   <a href="https://www.mixmods.com.br/2022/03/sa-mixsets/" rel="noopener" target="_blank">MixSets</a> ·
+                  <a href="https://www.mixmods.com.br/2022/04/real-traffic-fix/" rel="noopener" target="_blank">Real Traffic Fix</a> ·
+                  <a href="https://github.com/JuniorDjjr/real-traffic-fix" rel="noopener" target="_blank">RTF source</a> ·
+                  <a href="https://www.patreon.com/ZZPuma/posts/vehdeform-1-3c-134153605" rel="noopener" target="_blank">VehDeform</a> ·
                   <a href="https://github.com/aap/skygfx" rel="noopener" target="_blank">SkyGfx</a> ·
                   <a href="https://github.com/ThirteenAG/III.VC.SA.IV.Project2DFX" rel="noopener" target="_blank">Project2DFX</a> ·
                   <a href="https://libertycity.net/files/gta-san-andreas/211490-void-weapon-wheel.html" rel="noopener" target="_blank">Void Weapon Wheel</a> ·
