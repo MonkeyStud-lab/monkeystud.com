@@ -1,17 +1,15 @@
 (function () {
-  var script = document.querySelector("script[src*=\"site.js\"]");
+  var script = document.querySelector('script[src*="site.js"]');
   var root = script && script.src ? script.src.replace(/site\.js(\?.*)?$/, "") : "";
+  var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function sparkles() {
     var layer = document.getElementById("sparkles");
     if (!layer) return;
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
     var last = 0;
     document.addEventListener("mousemove", function (e) {
-      var now = Date.now();
-      if (now - last < 40) return;
-      last = now;
+      if (motion.matches || Date.now() - last < 40) return;
+      last = Date.now();
       var star = document.createElement("span");
       star.className = "sparkle";
       star.textContent = "*";
@@ -22,31 +20,36 @@
     });
   }
 
-  function padHits(n) {
-    var s = String(Math.max(0, parseInt(n, 10) || 0));
-    while (s.length < 7) s = "0" + s;
-    if (s.length > 7) s = s.slice(-7);
-    return s;
-  }
-
-  function renderCounter(n) {
-    var box = document.getElementById("hit-counter");
-    if (!box) return;
-    box.innerHTML = "";
-    padHits(n).split("").forEach(function (d) {
-      var span = document.createElement("span");
-      span.textContent = d;
-      box.appendChild(span);
-    });
-  }
-
   function hitCounter() {
-    fetch("https://tally.yuki.sh/hits/monkeystud/homepage.json")
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        renderCounter(data.visit || data.visitor || 0);
+    var box = document.getElementById("hit-counter");
+    var live = location.hostname === "monkeystud.com" || location.hostname === "www.monkeystud.com";
+    // All pages share one counter. Local previews only read it.
+    var url = "https://tally.yuki.sh/hits/monkeystud/homepage.json" + (live ? "" : "?mode=read");
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 8000);
+    fetch(url, { signal: controller.signal, cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Counter unavailable");
+        return r.json();
       })
-      .catch(function () {});
+      .then(function (data) {
+        // Never fall back to page hits, even when the visitor total is zero.
+        if (!Number.isSafeInteger(data.visitor) || data.visitor < 0) throw new Error("Invalid visitor total");
+        if (!box) return;
+        box.textContent = "";
+        String(data.visitor).padStart(7, "0").split("").forEach(function (digit) {
+          var span = document.createElement("span");
+          span.textContent = digit;
+          box.appendChild(span);
+        });
+        box.setAttribute("aria-label", data.visitor + " unique visitors, estimated by distinct IP address");
+      })
+      .catch(function () {
+        if (!box) return;
+        box.textContent = "Unavailable";
+        box.setAttribute("aria-label", "Visitor counter unavailable");
+      })
+      .finally(function () { clearTimeout(timeout); });
   }
 
   function midi() {
@@ -54,88 +57,69 @@
     if (!audio) {
       audio = document.createElement("audio");
       audio.id = "lab-midi";
-      audio.loop = true;
-      audio.preload = "auto";
-      audio.setAttribute("playsinline", "");
+      audio.src = root + "audio/lab-theme.wav";
       document.body.appendChild(audio);
     }
     audio.loop = true;
-    audio.muted = false;
-    audio.volume = 1;
-    if (!audio.currentSrc && !audio.getAttribute("src") && !audio.querySelector("source")) {
-      audio.src = root + "audio/lab-theme.wav";
-    } else if (audio.tagName && !audio.querySelector("source") && !audio.src) {
-      audio.src = root + "audio/lab-theme.wav";
-    }
+    audio.preload = "none";
+    audio.setAttribute("playsinline", "");
+    audio.volume = 0.3;
 
-    var panel = document.querySelector(".midi");
     var toggle = document.getElementById("midi-toggle");
-    var status = document.getElementById("midi-status");
-    var title = document.getElementById("midi-title");
-    if (title) title.textContent = "lab-theme.mid";
-
     if (!toggle) {
       var bar = document.createElement("div");
-      bar.className = "midi-bar";
-      bar.innerHTML = "<b>MIDI</b> lab-theme.mid &nbsp;<button type=\"button\" class=\"btn\" id=\"midi-toggle\">Play MIDI!!!</button>";
-      document.body.appendChild(bar);
+      bar.className = "midi-bar midi";
+      bar.innerHTML = '<b>Lab theme</b> <button type="button" class="btn" id="midi-toggle">Play MIDI!!!</button> <label class="music-volume" for="midi-volume">Volume <input id="midi-volume" type="range" min="0" max="100" value="30" /></label> <span class="tiny" id="midi-status" role="status">Click Play to start the chiptune loop.</span>';
+      var nav = document.querySelector(".jump");
+      if (nav) nav.insertAdjacentElement("afterend", bar);
+      else document.body.prepend(bar);
       toggle = document.getElementById("midi-toggle");
     }
 
+    var panel = document.querySelector(".midi");
+    var status = document.getElementById("midi-status");
+    var volume = document.getElementById("midi-volume");
     var wantOn = false;
+    var attempt = 0;
 
-    function setOn(on) {
-      wantOn = on;
-      if (panel) {
-        if (on) panel.classList.add("on");
-        else panel.classList.remove("on");
-      }
-      if (toggle) toggle.textContent = on ? "Stop MIDI" : "Play MIDI!!!";
-      if (status) {
-        status.textContent = on
-          ? "Now blasting in glorious 22kHz mono."
-          : "Click Play MIDI — Edge and Chrome block autoplay.";
-      }
+    function show(on, message) {
+      if (panel) panel.classList.toggle("on", on);
+      toggle.textContent = on ? "Stop MIDI" : "Play MIDI!!!";
+      toggle.setAttribute("aria-pressed", String(on));
+      if (status) status.textContent = message;
     }
-
-    function fail(err) {
-      if (!wantOn) return;
-      setOn(false);
-      if (status) {
-        status.textContent = "Could not start audio" + (err && err.name ? " (" + err.name + ")" : "") + ". Click Play MIDI again.";
-      }
-    }
-
-    function play() {
-      wantOn = true;
-      if (!audio.currentSrc) audio.src = root + "audio/lab-theme.wav";
-      audio.muted = false;
-      audio.volume = 1;
-      var started = audio.play();
-      if (started && typeof started.then === "function") {
-        started.then(function () {
-          if (wantOn) setOn(true);
-        }).catch(fail);
-      } else if (!audio.paused) {
-        setOn(true);
-      }
-    }
-
     function stop() {
       wantOn = false;
+      attempt++;
       audio.pause();
       try { audio.currentTime = 0; } catch (e) {}
-      setOn(false);
+      show(false, "Stopped. Click Play to start again.");
     }
-
-    function onToggle() {
-      if (wantOn && !audio.paused) stop();
-      else play();
+    function fail(err, token) {
+      if (!wantOn || token !== attempt) return;
+      wantOn = false;
+      show(false, "Audio could not start" + (err && err.name ? " (" + err.name + ")" : "") + ". Try Play again.");
     }
-
-    if (toggle) {
-      toggle.addEventListener("click", onToggle);
+    toggle.addEventListener("click", function () {
+      if (wantOn) { stop(); return; }
+      wantOn = true;
+      var token = ++attempt;
+      show(true, "Starting the chiptune loop...");
+      try {
+        // Keep play() directly in the user click; no AudioContext or autoplay.
+        var started = audio.play();
+        if (started && started.then) {
+          started.then(function () {
+            if (wantOn && token === attempt) show(true, "Playing the lab chiptune loop.");
+          }).catch(function (err) { fail(err, token); });
+        }
+      } catch (err) { fail(err, token); }
+    });
+    audio.addEventListener("error", function () { fail(audio.error, attempt); });
+    if (volume) {
+      volume.addEventListener("input", function () { audio.volume = Number(volume.value) / 100; });
     }
+    show(false, "Click Play to start the chiptune loop.");
   }
 
   sparkles();

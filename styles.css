@@ -1,4 +1,4 @@
-﻿html { scroll-behavior: auto; }
+html { scroll-behavior: auto; }
 
 body {
   margin: 0;
@@ -49,7 +49,7 @@ a:active, a:hover { color: #ffff00; }
   padding: 4px 0;
 }
 
-.construction marquee {
+.construction .marquee-text {
   color: #000;
   font-weight: bold;
 }
@@ -360,8 +360,7 @@ a:active, a:hover { color: #ffff00; }
 .midi:not(.on) .midi-eq span { animation: none; opacity: 0.35; }
 
 .midi-bar {
-  position: sticky;
-  top: 0;
+  position: static;
   z-index: 20;
   background: #000080;
   color: #ffff00;
@@ -457,4 +456,30 @@ a:active, a:hover { color: #ffff00; }
 
 @media (prefers-reduced-motion: reduce) {
   .blink, .fire, .globe, .midi-eq span, .sparkle { animation: none; }
+}
+
+/* Keep the 90s marquee look while respecting reduced motion. */
+.retro-marquee { overflow: hidden; }
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: marquee-scroll 35s linear infinite;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.construction .retro-marquee { margin: 0 8px; background: #111; }
+.construction .marquee-text { color: #ffcc00; }
+.midi-bar { margin: 0 0 12px; position: static; }
+.midi-bar .tiny { display: block; margin-top: 4px; }
+.music-volume { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.music-volume input { width: 90px; accent-color: #00ff00; }
+.btn:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible {
+  outline: 2px solid #ffff00;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-text { animation: none; padding-left: 0; white-space: normal; }
 }

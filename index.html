@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=920" />
   <title>*** WELCOME TO MONKEYSTUD.COM ***</title>
   <meta name="description" content="MonkeyStud lab: personal tools, game mods, and homelab experiments. Best viewed in Netscape Navigator 4.0 at 800x600." />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260924-ui1" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000080'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='22' font-family='Comic Sans MS,cursive' fill='%23ffff00'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body bgcolor="#000018" text="#00FF00" link="#00FFFF" vlink="#FF66FF" alink="#FFFF00" id="top">
 
   <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
 
-  <marquee class="top-marquee" behavior="scroll" direction="left" scrollamount="6">
+  <div class="top-marquee retro-marquee"><span class="marquee-text">
     *** WELCOME TO MONKEYSTUD.COM *** THE OFFICIAL HOMEPAGE OF MONKEYSTUD-LAB *** TOOLS, MODS, AND SMALL SYSTEMS THAT STAY OUT OF THE WAY *** SIGN THE GUESTBOOK *** BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 @ 800x600 ***
-  </marquee>
+  </span></div>
 
   <center>
     <table class="page" width="780" cellspacing="0" cellpadding="0" border="0">
@@ -22,9 +22,9 @@
         <td>
 
           <div class="construction" role="status">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
+            <div class="retro-marquee"><span class="marquee-text">
               *** UNDER CONSTRUCTION *** excuse our dust while the webmaster installs more blinking GIFs *** UNDER CONSTRUCTION ***
-            </marquee>
+            </span></div>
           </div>
 
           <table class="banner" width="100%" cellspacing="0" cellpadding="10" border="5">
@@ -39,10 +39,8 @@
                 </p>
                 <p class="updated">
                   Last updated: <b>September 24, 2026</b>
-                  &nbsp;|&nbsp; You are visitor number
-                  <span class="counter" id="hit-counter" title="live hit counter">
-                    <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
-                  </span>
+                  &nbsp;|&nbsp; Unique visitors
+                  <span class="counter" id="hit-counter" role="status" title="Estimated by distinct IP address; shared networks count as one.">Loading...</span>
                 </p>
               </td>
             </tr>
@@ -80,12 +78,12 @@
                   <tr>
                     <td align="center">
                       <p class="midi-eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></p>
-                      <p><b id="midi-title">lab-theme.mid</b></p>
+                      <p><b id="midi-title">Lab theme (chiptune)</b></p>
                       <p>
                         <button type="button" class="btn" id="midi-toggle">Play MIDI!!!</button>
                       </p>
-                      <p class="tiny" id="midi-status">Click Play MIDI — Edge and Chrome block autoplay.</p>
-                      <audio id="lab-midi" loop preload="auto" playsinline>
+                      <p><label class="music-volume" for="midi-volume">Volume <input id="midi-volume" type="range" min="0" max="100" value="30" /></label></p><p class="tiny" id="midi-status" role="status">Click Play to start the chiptune loop.</p>
+                      <audio id="lab-midi" loop preload="none" playsinline>
                         <source src="audio/lab-theme.wav" type="audio/wav" />
                       </audio>
                     </td>
@@ -222,17 +220,18 @@
 
                       <h2 id="guestbook">Sign my Guestbook</h2>
                       <hr class="rainbow" />
-                      <p>CGI scripts are still on backorder from 1998. Leave a note on GitHub instead:</p>
-                      <form class="guestbook" action="https://github.com/MonkeyStud-lab" method="get" target="_blank" onsubmit="alert('Thanks for signing the guestbook!!! CGI is still under construction, so this opens the GitHub org instead.');">
+                      <p>Leave a public guestbook message on GitHub. Continue below to review and post it there; a GitHub account is required.</p>
+                      <form class="guestbook" action="https://github.com/MonkeyStud-lab/monkeystud.com/issues/new" method="get" target="_blank" rel="noopener">
                         <p>
-                          Name: <input type="text" size="24" placeholder="Anonymous Coward" /><br />
-                          Email: <input type="text" size="24" placeholder="user@aol.com" /><br />
-                          Comments:<br />
-                          <textarea rows="4" cols="40" placeholder="Cool homepage!!! Need more flames."></textarea>
+                          <label for="guestbook-title">Subject / name:</label><br />
+                          <input id="guestbook-title" type="text" name="title" size="32" maxlength="100" value="Guestbook: " required /><br />
+                          <label for="guestbook-message">Message:</label><br />
+                          <textarea id="guestbook-message" name="body" rows="4" cols="40" maxlength="2000" required placeholder="Cool homepage!!! Need more flames."></textarea>
                         </p>
                         <p align="center">
-                          <input class="btn" type="submit" value="Sign Guestbook!!!" />
+                          <button class="btn" type="submit">Continue to GitHub</button>
                         </p>
+                        <p class="tiny">Your message is only published after you submit it on GitHub.</p>
                       </form>
                     </td>
                   </tr>
@@ -403,6 +402,6 @@
     </table>
   </center>
 
-  <script src="site.js?v=midi3"></script>
+  <script src="site.js?v=20260924-ui1"></script>
 </body>
 </html>
