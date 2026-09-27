@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=920" />
   <title>GTA San Andreas QoL — MonkeyStud</title>
-  <meta name="description" content="GTA San Andreas QoL + GTA 5-feel controls: DualSense, 60 FPS windowed, Focus, weapon wheel, Real Traffic Fix, VehDeform, and the live mod stack." />
+  <meta name="description" content="GTA San Andreas QoL + GTA 5-feel controls: DualSense, 60 FPS windowed, Focus, weapon wheel, Real Traffic Fix, VehDeform, Overdose Effects, and the live mod stack." />
   <link rel="stylesheet" href="../styles.css?v=20260924-ui1" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000080'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='22' font-family='Comic Sans MS,cursive' fill='%23ffff00'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body bgcolor="#000018" text="#00FF00" link="#00FFFF" vlink="#FF66FF" alink="#FFFF00" id="top">
   <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
   <div class="top-marquee retro-marquee"><span class="marquee-text">
-    *** GTA SAN ANDREAS QOL *** DUALSENSE + PS PROMPTS *** 60 FPS WINDOWED 1080P *** REAL TRAFFIC FIX *** VEHDEFORM *** F2 SAVE *** TAB/Q WEAPON WHEEL *** CAPS / L3+R3 FOCUS ***
+    *** GTA SAN ANDREAS QOL *** DUALSENSE + PS PROMPTS *** 60 FPS WINDOWED 1080P *** REAL TRAFFIC FIX *** VEHDEFORM *** OVERDOSE EFFECTS *** F2 SAVE *** TAB/Q WEAPON WHEEL *** CAPS / L3+R3 FOCUS ***
   </span></div>
   <center>
     <table class="page" width="780" cellspacing="0" cellpadding="0" border="0">
@@ -68,8 +68,9 @@
                     <li><span class="kbd">Tab</span> / <span class="kbd">Q</span> weapon wheel (slow-mo on).</li>
                     <li><span class="kbd">Caps Lock</span> or <span class="kbd">L3+R3</span> Focus: on-foot Area Kill + car slow-mo. No blue wash. Meter stays full.</li>
                     <li>Pad driveby: <span class="kbd">L1</span> aim, <span class="kbd">R1</span> shoot; D-pad left/right cycles weapons.</li>
-                    <li><b>Real Traffic Fix</b> — NPCs keep realistic speeds, slow for curves, trucks in the slow lane, fewer suicidal cut-ins. Defaults are fine. No other traffic-AI mod.</li>
-                    <li><b>VehDeform</b> — crashes, bullets, melee, and explosions dent the mesh. Cheats: <font color="#FFFF00">VDCOL</font> toggle (missions), <font color="#FFFF00">VDRES</font> repair, <font color="#FFFF00">VDBG</font> debug. Not with LocalDent.</li>
+                    <li><b>Real Traffic Fix</b> — smarter traffic AI: realistic speeds, lane discipline, fewer suicidal cut-ins. Defaults are fine. No other traffic-AI mod.</li>
+                    <li><b>VehDeform</b> — real-time dents on every vehicle. Cheats: <font color="#FFFF00">VDCOL</font> toggle, <font color="#FFFF00">VDRES</font> reset, <font color="#FFFF00">VDBG</font> debug. Not with LocalDent.</li>
+                    <li><b>Overdose Effects</b> — huge explosions, thicker smoke and fire, new bullet impacts, sparks, and muzzle flashes. Own Mod Loader folder. Don't pair it with other effects packs.</li>
                   </ul>
                 </div>
 
@@ -151,10 +152,12 @@
                       <a href="https://www.mixmods.com.br/2022/04/real-traffic-fix/" rel="noopener" target="_blank">Real Traffic Fix 2.2.1 beta</a>
                     </td>
                     <td>
-                      Junior_Djjr. Traffic keeps realistic speeds, slows for curves and obstacles, trucks/buses in the slow lane, fewer cut-ins, cars no longer stuck in the ground.
-                      Folder <font color="#FFFF00">modloader\RealTrafficFix\</font>. Defaults on.
+                      Junior_Djjr (MixMods). NPC cars keep realistic speeds, slow for curves and obstacles, and stop cutting in front of you. Trucks and buses stay in the slow lane. Fixes cars stuck in the ground.
+                      Silent's ASI Loader + Mod Loader. SA 1.0 US.
+                      <font color="#FFFF00">modloader\RealTrafficFix\RealTrafficFix.SA.asi</font> and <font color="#FFFF00">RealTrafficFix.ini</font>.
+                      Defaults are fine. The INI sets cruise speed, lane behavior, horn frequency, and speed bumps. <font color="#FFFF00">TestMode = 1</font> shows debug info.
                       <a href="https://github.com/JuniorDjjr/real-traffic-fix" rel="noopener" target="_blank">source</a>.
-                      Don't stack another traffic-AI mod.
+                      Don't run it with any other traffic-AI mod.
                     </td>
                   </tr>
                   <tr>
@@ -162,10 +165,13 @@
                       <a href="https://www.patreon.com/ZZPuma/posts/vehdeform-1-3c-134153605" rel="noopener" target="_blank">VehDeform 1.3c</a>
                     </td>
                     <td>
-                      ZZPuma. Mesh dents on cars, bikes, boats, aircraft. Heavy hits can bend hoods, pop tires, kill the engine.
-                      Folder <font color="#FFFF00">modloader\VehDeform\</font>. Free public Patreon post (archive password is on that page).
-                      Cheats: <font color="#FFFF00">VDCOL</font> / <font color="#FFFF00">VDRES</font> / <font color="#FFFF00">VDBG</font>.
-                      Conflicts with LocalDent — this stack uses VehDeform only.
+                      ZZPuma. Crashes, bullets, melee, and explosions dent the mesh on cars, bikes, boats, and aircraft. Heavy hits can bend hoods, pop tires and parts, and kill the engine.
+                      Silent's ASI Loader, SilentPatch, Open Limit Adjuster, and Mod Loader.
+                      <font color="#FFFF00">modloader\VehDeform\VehDeform.SA.asi</font> and <font color="#FFFF00">VehDeform_CFG.ini</font>.
+                      Free public Patreon post; archive password is <font color="#FFFF00">123</font> (stated on the post).
+                      Cheats: <font color="#FFFF00">VDCOL</font> toggles all deformation (missions it can break), <font color="#FFFF00">VDRES</font> resets the current vehicle mesh, <font color="#FFFF00">VDBG</font> debug (arrow keys).
+                      INI: impact strength, whether peds / player / engine can be killed, tire and part pop thresholds, allowed vehicle types, ignore list (Rhino, Skimmer, RC Baron by default). Turn off DeformCollision if you use SA-MP.
+                      Conflicts with LocalDent — install only one.
                     </td>
                   </tr>
                 </table>
@@ -239,6 +245,22 @@
                     <td><a href="https://github.com/ThirteenAG/III.VC.SA.IV.Project2DFX" rel="noopener" target="_blank">Project 2DFX</a></td>
                     <td>LOD/corona lights. Pack's old limit adjuster skipped — we use Open Limit Adjuster.</td>
                   </tr>
+                  <tr>
+                    <td>
+                      <a href="https://www.gtagarage.com/mods/show.php?id=9226" rel="noopener" target="_blank">Overdose Effects 1.5</a>
+                    </td>
+                    <td>
+                      Function-X- (thanks DK22Pac). Final official release, Dec 31 2012. Bigger, more intense explosions, fire, smoke, bullet impacts, sparks, blood, muzzle flashes, and water splashes. Also butterflies, fireflies, falling leaves and petals, fireworks, sewer steam, distinct grenade / rocket / satchel / petrol-pump explosions, lamp-post sparks, and burning barrels. Punchy, a bit over the top.
+                      Nothing beyond the game. SA 1.0 US. Mod Loader so originals are not overwritten.
+                      <font color="#FFFF00">modloader\OverdoseEffects\models\effects.fxp</font>, <font color="#FFFF00">models\effectsPC.txd</font>, <font color="#FFFF00">data\object.dat</font>, <font color="#FFFF00">data\surfinfo.dat</font>.
+                      Without Mod Loader, copy the archive's Models and Data folders over the game folder after backing up those four files.
+                      Get "Overdose Effects V1.5 Part One" from the author's upload. There is no Part Two. Anything labeled v1.6 is an unofficial re-upload.
+                      <a href="https://gtaforums.com/topic/412597-relsa-overdose-effects/" rel="noopener" target="_blank">official topic</a>.
+                      No config file. effects.fxp and effectsPC.txd are the look. object.dat links objects to the new effects and makes lamp posts and traffic lights take more collision damage; surfinfo.dat changes bullet impacts on wood and grass. Leave the two .dat files out to keep just the visuals.
+                      The ~16 MB effectsPC.txd can cost FPS in big explosions. MixSets <font color="#FFFF00">FxEmissionRateMult</font> can cut particle density.
+                      Works with SkyGfx and Project2DFX. Don't combine with other packs that replace effects.fxp / effectsPC.txd (IMFX effects, NextGen/Remaster Effects, Overdose retexture packs). Other mods that ship their own object.dat or surfinfo.dat can clash.
+                    </td>
+                  </tr>
                 </table>
 
                 <h2>Not in the live load</h2>
@@ -261,6 +283,8 @@
                   <a href="https://www.mixmods.com.br/2022/04/real-traffic-fix/" rel="noopener" target="_blank">Real Traffic Fix</a> ·
                   <a href="https://github.com/JuniorDjjr/real-traffic-fix" rel="noopener" target="_blank">RTF source</a> ·
                   <a href="https://www.patreon.com/ZZPuma/posts/vehdeform-1-3c-134153605" rel="noopener" target="_blank">VehDeform</a> ·
+                  <a href="https://www.gtagarage.com/mods/show.php?id=9226" rel="noopener" target="_blank">Overdose Effects</a> ·
+                  <a href="https://gtaforums.com/topic/412597-relsa-overdose-effects/" rel="noopener" target="_blank">Overdose topic</a> ·
                   <a href="https://github.com/aap/skygfx" rel="noopener" target="_blank">SkyGfx</a> ·
                   <a href="https://github.com/ThirteenAG/III.VC.SA.IV.Project2DFX" rel="noopener" target="_blank">Project2DFX</a> ·
                   <a href="https://libertycity.net/files/gta-san-andreas/211490-void-weapon-wheel.html" rel="noopener" target="_blank">Void Weapon Wheel</a> ·
